@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "portfolio_stacks",
+  "info": {
+    "singularName": "portfolio-stack",
+    "pluralName": "portfolio-stacks",
+    "displayName": "Portfolio Stack"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "stacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::stack.stack"
+    }
+  }
+}

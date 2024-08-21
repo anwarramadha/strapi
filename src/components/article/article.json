@@ -1,23 +1,21 @@
 {
-  "kind": "collectionType",
-  "collectionName": "articles",
+  "collectionName": "components_article_articles",
   "info": {
-    "singularName": "article",
-    "pluralName": "articles",
     "displayName": "Article",
     "description": ""
   },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
+  "options": {},
   "attributes": {
     "title": {
       "type": "string",
       "required": true
     },
-    "subtitle": {
-      "type": "text"
+    "summary": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string",
+      "required": true
     },
     "tags": {
       "type": "relation",
@@ -32,11 +30,6 @@
     "content": {
       "type": "richtext",
       "required": true
-    },
-    "slug": {
-      "type": "string",
-      "required": true,
-      "unique": true
     }
   }
 }

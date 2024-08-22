@@ -6,16 +6,8 @@
   },
   "options": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
     "summary": {
       "type": "string"
-    },
-    "slug": {
-      "type": "string",
-      "required": true
     },
     "tags": {
       "type": "relation",

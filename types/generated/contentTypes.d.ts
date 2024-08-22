@@ -898,12 +898,15 @@ export interface ApiPostPost extends Schema.CollectionType {
     singularName: 'post';
     pluralName: 'posts';
     displayName: 'Post';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     article: Attribute.Component<'article.article'>;
+    slug: Attribute.UID<'api::post.post', 'title'> & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -929,6 +932,8 @@ export interface ApiProjectProject extends Schema.CollectionType {
     demoUrl: Attribute.String;
     repositoryUrl: Attribute.String;
     article: Attribute.Component<'article.article'>;
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::project.project', 'title'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -940,6 +945,40 @@ export interface ApiProjectProject extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiResumeResume extends Schema.CollectionType {
+  collectionName: 'resumes';
+  info: {
+    singularName: 'resume';
+    pluralName: 'resumes';
+    displayName: 'Resume';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    joinDate: Attribute.Date & Attribute.Required;
+    leaveDate: Attribute.Date;
+    institution: Attribute.String & Attribute.Required;
+    position: Attribute.String;
+    description: Attribute.RichText & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::resume.resume',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::resume.resume',
       'oneToOne',
       'admin::user'
     > &
@@ -1026,6 +1065,7 @@ declare module '@strapi/types' {
       'api::portfolio-stack.portfolio-stack': ApiPortfolioStackPortfolioStack;
       'api::post.post': ApiPostPost;
       'api::project.project': ApiProjectProject;
+      'api::resume.resume': ApiResumeResume;
       'api::stack.stack': ApiStackStack;
       'api::tag.tag': ApiTagTag;
     }

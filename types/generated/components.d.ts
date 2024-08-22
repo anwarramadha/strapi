@@ -7,9 +7,7 @@ export interface ArticleArticle extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
     summary: Attribute.String;
-    slug: Attribute.String & Attribute.Required;
     tags: Attribute.Relation<'article.article', 'oneToMany', 'api::tag.tag'>;
     stacks: Attribute.Relation<
       'article.article',

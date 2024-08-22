@@ -4,7 +4,8 @@
   "info": {
     "singularName": "post",
     "pluralName": "posts",
-    "displayName": "Post"
+    "displayName": "Post",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,6 +16,15 @@
       "type": "component",
       "repeatable": false,
       "component": "article.article"
+    },
+    "slug": {
+      "type": "uid",
+      "required": true,
+      "targetField": "title"
+    },
+    "title": {
+      "type": "string",
+      "required": true
     }
   }
 }

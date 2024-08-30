@@ -4,7 +4,8 @@
   "info": {
     "singularName": "resume",
     "pluralName": "resumes",
-    "displayName": "Resume"
+    "displayName": "Resume",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -28,6 +29,12 @@
     "description": {
       "type": "richtext",
       "required": true
+    },
+    "order": {
+      "type": "integer"
+    },
+    "location": {
+      "type": "string"
     }
   }
 }

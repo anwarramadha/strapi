@@ -840,6 +840,14 @@ export interface ApiAboutMeAboutMe extends Schema.SingleType {
   };
   attributes: {
     content: Attribute.RichText;
+    name: Attribute.String & Attribute.Required;
+    expertise: Attribute.String & Attribute.Required;
+    photo: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    email: Attribute.String;
+    order: Attribute.Integer;
+    portfolioWebsite: Attribute.String;
+    cv: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    skills: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -851,6 +859,81 @@ export interface ApiAboutMeAboutMe extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::about-me.about-me',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCertificationCertification extends Schema.CollectionType {
+  collectionName: 'certifications';
+  info: {
+    singularName: 'certification';
+    pluralName: 'certifications';
+    displayName: 'certification';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    organizer: Attribute.String & Attribute.Required;
+    date: Attribute.Date & Attribute.Required;
+    description: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::certification.certification',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::certification.certification',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEducationEducation extends Schema.CollectionType {
+  collectionName: 'educations';
+  info: {
+    singularName: 'education';
+    pluralName: 'educations';
+    displayName: 'Education';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    school: Attribute.String & Attribute.Required;
+    major: Attribute.String & Attribute.Required;
+    gpa: Attribute.Decimal &
+      Attribute.SetMinMax<
+        {
+          max: 4;
+        },
+        number
+      >;
+    start: Attribute.Integer & Attribute.Required;
+    end: Attribute.Integer;
+    order: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::education.education',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::education.education',
       'oneToOne',
       'admin::user'
     > &
@@ -958,6 +1041,7 @@ export interface ApiResumeResume extends Schema.CollectionType {
     singularName: 'resume';
     pluralName: 'resumes';
     displayName: 'Resume';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -968,6 +1052,8 @@ export interface ApiResumeResume extends Schema.CollectionType {
     institution: Attribute.String & Attribute.Required;
     position: Attribute.String;
     description: Attribute.RichText & Attribute.Required;
+    order: Attribute.Integer;
+    location: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -979,6 +1065,72 @@ export interface ApiResumeResume extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::resume.resume',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSiteInfoSiteInfo extends Schema.SingleType {
+  collectionName: 'site_infos';
+  info: {
+    singularName: 'site-info';
+    pluralName: 'site-infos';
+    displayName: 'Site Info';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::site-info.site-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::site-info.site-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSocialSocial extends Schema.CollectionType {
+  collectionName: 'socials';
+  info: {
+    singularName: 'social';
+    pluralName: 'socials';
+    displayName: 'Social';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    text: Attribute.String & Attribute.Required;
+    name: Attribute.String & Attribute.Required;
+    url: Attribute.String;
+    icon: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::social.social',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::social.social',
       'oneToOne',
       'admin::user'
     > &
@@ -1062,10 +1214,14 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::about-me.about-me': ApiAboutMeAboutMe;
+      'api::certification.certification': ApiCertificationCertification;
+      'api::education.education': ApiEducationEducation;
       'api::portfolio-stack.portfolio-stack': ApiPortfolioStackPortfolioStack;
       'api::post.post': ApiPostPost;
       'api::project.project': ApiProjectProject;
       'api::resume.resume': ApiResumeResume;
+      'api::site-info.site-info': ApiSiteInfoSiteInfo;
+      'api::social.social': ApiSocialSocial;
       'api::stack.stack': ApiStackStack;
       'api::tag.tag': ApiTagTag;
     }

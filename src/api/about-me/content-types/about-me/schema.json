@@ -14,6 +14,49 @@
   "attributes": {
     "content": {
       "type": "richtext"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "expertise": {
+      "type": "string",
+      "required": true
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "order": {
+      "type": "integer"
+    },
+    "portfolioWebsite": {
+      "type": "string"
+    },
+    "cv": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "skills": {
+      "type": "text"
     }
   }
 }

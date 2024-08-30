@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "educations",
+  "info": {
+    "singularName": "education",
+    "pluralName": "educations",
+    "displayName": "Education",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "school": {
+      "type": "string",
+      "required": true
+    },
+    "major": {
+      "type": "string",
+      "required": true
+    },
+    "gpa": {
+      "type": "decimal",
+      "max": 4
+    },
+    "start": {
+      "type": "integer",
+      "required": true
+    },
+    "end": {
+      "type": "integer"
+    },
+    "order": {
+      "type": "integer"
+    }
+  }
+}

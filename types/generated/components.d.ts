@@ -1,5 +1,16 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ImageIcon extends Schema.Component {
+  collectionName: 'components_image_icons';
+  info: {
+    displayName: 'Icon';
+  };
+  attributes: {
+    icon: Attribute.Media<'images'>;
+    darkIcon: Attribute.Media<'images'>;
+  };
+}
+
 export interface ArticleArticle extends Schema.Component {
   collectionName: 'components_article_articles';
   info: {
@@ -15,12 +26,15 @@ export interface ArticleArticle extends Schema.Component {
       'api::stack.stack'
     >;
     content: Attribute.RichText & Attribute.Required;
+    heroImage: Attribute.Media<'images'>;
+    readingTime: Attribute.Integer & Attribute.DefaultTo<3>;
   };
 }
 
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'image.icon': ImageIcon;
       'article.article': ArticleArticle;
     }
   }

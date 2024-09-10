@@ -1086,6 +1086,7 @@ export interface ApiSiteInfoSiteInfo extends Schema.SingleType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text;
+    image: Attribute.Media<'images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1150,7 +1151,7 @@ export interface ApiStackStack extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    icon: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    icon: Attribute.Media<'images'>;
     name: Attribute.String;
     url: Attribute.String;
     createdAt: Attribute.DateTime;
